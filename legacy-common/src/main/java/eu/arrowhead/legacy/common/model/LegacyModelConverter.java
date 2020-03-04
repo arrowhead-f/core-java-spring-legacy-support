@@ -92,7 +92,7 @@ public class LegacyModelConverter {
 		entry.setId(dto.getId());
 		entry.setProvidedService(providedService);
 		entry.setProvider(provider);
-		entry.setServiceUri(dto.getServiceUri());
+		entry.setServiceURI(dto.getServiceUri());
 		entry.setUdp(false);
 		entry.setVersion(dto.getVersion());
 		entry.setEndOfValidity(Utilities.isEmpty(dto.getEndOfValidity()) ? null : convertUTCSTringToLocalDateTime(dto.getEndOfValidity()));
@@ -112,7 +112,7 @@ public class LegacyModelConverter {
 		final ServiceRegistryRequestDTO dto = new ServiceRegistryRequestDTO();
 		dto.setServiceDefinition(entry.getProvidedService().getServiceDefinition());
 		dto.setProviderSystem(provider);
-		dto.setServiceUri(entry.getServiceUri());
+		dto.setServiceUri(entry.getServiceURI());
 		dto.setVersion(entry.getVersion());
 		dto.setSecure(calculateSecurityType(entry.getProvidedService().getServiceMetadata()));
 		entry.getProvidedService().getServiceMetadata().remove(LegacyCommonConstants.KEY_SECURITY);
