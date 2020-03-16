@@ -148,7 +148,7 @@ public class LegacyOrchestratorAppInitListener extends LegacyAppInitListener {
 		serviceRegistryRequestDTO.setServiceDefinition(CoreSystemService.ORCHESTRATION_SERVICE.getServiceDefinition());
 		serviceRegistryRequestDTO.setServiceUri(CoreSystemService.ORCHESTRATION_SERVICE.getServiceUri());
 		serviceRegistryRequestDTO.setInterfaces(sslProperties.isSslEnabled() ? List.of(CommonConstants.HTTP_SECURE_JSON) : List.of(CommonConstants.HTTP_INSECURE_JSON));
-		serviceRegistryRequestDTO.setSecure(sslProperties.isSslEnabled() ? ServiceSecurityType.CERTIFICATE : ServiceSecurityType.NOT_SECURE);
+		serviceRegistryRequestDTO.setSecure(sslProperties.isSslEnabled() ? ServiceSecurityType.CERTIFICATE.name() : ServiceSecurityType.NOT_SECURE.name());
 		
 		httpService.sendRequest(srRegisterUri, HttpMethod.POST, ServiceRegistryResponseDTO.class, serviceRegistryRequestDTO);
 	}

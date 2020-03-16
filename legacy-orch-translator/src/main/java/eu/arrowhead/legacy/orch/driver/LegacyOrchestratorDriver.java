@@ -72,13 +72,13 @@ public class LegacyOrchestratorDriver {
 	//-------------------------------------------------------------------------------------------------
 	public ResponseEntity<OrchestrationResponseDTO> proceedOrchestration413(final OrchestrationFormRequestDTO request) {
 		final String origin = CommonConstants.ORCHESTRATOR_URI + CommonConstants.OP_ORCH_PROCESS;
-		if (request.getOrchestrationFlags().getOrDefault(Flag.TRIGGER_INTER_CLOUD, false)) {
-			throw new BadPayloadException("Translator does not support orchestration with flag 'TRIGGER_INTER_CLOUD=true'", HttpStatus.SC_BAD_REQUEST, origin);
-		}	
-		if (request.getOrchestrationFlags().getOrDefault(Flag.ENABLE_INTER_CLOUD, false)) {
-			request.getOrchestrationFlags().put(Flag.ENABLE_INTER_CLOUD, false);
-			logger.debug("Orchestration flag 'ENABLE_INTER_CLOUD=true' is not supported and was changed to false");
-		}
+//		if (request.getOrchestrationFlags().getOrDefault(Flag.TRIGGER_INTER_CLOUD, false)) {
+//			throw new BadPayloadException("Translator does not support orchestration with flag 'TRIGGER_INTER_CLOUD=true'", HttpStatus.SC_BAD_REQUEST, origin);
+//		}	
+//		if (request.getOrchestrationFlags().getOrDefault(Flag.ENABLE_INTER_CLOUD, false)) {
+//			request.getOrchestrationFlags().put(Flag.ENABLE_INTER_CLOUD, false);
+//			logger.debug("Orchestration flag 'ENABLE_INTER_CLOUD=true' is not supported and was changed to false");
+//		}
 		
 		final List<String> requestedInterfaces = request.getRequestedService().getInterfaceRequirements();
 		request.getRequestedService().setInterfaceRequirements(new ArrayList<>());

@@ -114,7 +114,7 @@ public class LegacyModelConverter {
 		dto.setProviderSystem(provider);
 		dto.setServiceUri(entry.getServiceURI());
 		dto.setVersion(entry.getVersion());
-		dto.setSecure(calculateSecurityType(entry.getProvidedService().getServiceMetadata()));
+		dto.setSecure(calculateSecurityTypeStr(entry.getProvidedService().getServiceMetadata()));
 		entry.getProvidedService().getServiceMetadata().remove(LegacyCommonConstants.KEY_SECURITY);
 		entry.getProvidedService().getServiceMetadata().put(LegacyCommonConstants.KEY_LEGACY_INTERFACE, entry.getProvidedService().getInterfaces().iterator().next());
 		dto.setInterfaces(List.of(LegacyCommonConstants.DEFAULT_INTERFACE));
@@ -280,6 +280,13 @@ public class LegacyModelConverter {
 		} else {
 			return ServiceSecurityType.NOT_SECURE;
 		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------
+	private static String calculateSecurityTypeStr(final Map<String,String> metadata) {
+		final ServiceSecurityType type = calculateSecurityType(metadata);
+		
+		return type == null ? null : type.name();
 	}
 	
 	//-------------------------------------------------------------------------------------------------
