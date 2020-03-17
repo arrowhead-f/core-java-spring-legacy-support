@@ -102,7 +102,7 @@ public class LegacyOrchestratorAppInitListener extends LegacyAppInitListener {
 		final ResponseEntity<ServiceQueryResultDTO> serviceQueryResult = httpService.sendRequest(srQueryUri, HttpMethod.POST, ServiceQueryResultDTO.class, serviceQueryFormDTO);
 		final List<ServiceRegistryResponseDTO> serviceQueryData = serviceQueryResult.getBody().getServiceQueryData();
 		if (serviceQueryData == null || serviceQueryData.isEmpty()) {
-			throw new ServiceConfigurationError("Orcestrator Core System not found");
+			throw new ServiceConfigurationError("Orchestrator Core System not found");
 		}
 		return serviceQueryData.iterator().next().getProvider();
 	}
@@ -129,7 +129,7 @@ public class LegacyOrchestratorAppInitListener extends LegacyAppInitListener {
 	
 	//-------------------------------------------------------------------------------------------------
 	private void registerLegacyOrchestratorTranslator(final String scheme) {
-		logger.debug("unregisterOrchestratorFromSR started...");
+		logger.debug("registerLegacyOrchestratorTranslator started...");
 		
 		final String srRegisterUriSrting = CommonConstants.SERVICE_REGISTRY_URI + LegacyCommonConstants.OP_SERVICE_REGISTRY_REGISTER_URI;
 		final UriComponents srRegisterUri = Utilities.createURI(scheme, systemRegistrationProperties.getServiceRegistryAddress(), systemRegistrationProperties.getServiceRegistryPort(),

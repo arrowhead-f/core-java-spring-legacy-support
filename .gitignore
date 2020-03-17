@@ -19,3 +19,4 @@
 /legacy-sr-translator/target
 /datamanager-proxy/.settings
 /datamanager-proxy/target
+/datamanager-proxy/*.log
