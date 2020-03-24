@@ -245,12 +245,22 @@ public class LegacyOrchestratorDriver {
 		if (requestedInterfaces != null) {
 			final List<OrchestrationResultDTO> resultsWithRequestedInterfaces = new ArrayList<>();
 			for (final OrchestrationResultDTO result : dto.getResponse()) {
-				for (final String interf : requestedInterfaces) {
-					if (interf != null && interf.equalsIgnoreCase(result.getMetadata().get(LegacyCommonConstants.KEY_LEGACY_INTERFACE))) {
-						final ServiceInterfaceResponseDTO interfaceResponseDTO = result.getInterfaces().iterator().next();
-						interfaceResponseDTO.setInterfaceName(result.getMetadata().get(LegacyCommonConstants.KEY_LEGACY_INTERFACE).toUpperCase());
-						result.setInterfaces(List.of(interfaceResponseDTO));
-						resultsWithRequestedInterfaces.add(result);
+				if (result.getMetadata() == null || !result.getMetadata().containsKey(LegacyCommonConstants.KEY_LEGACY_INTERFACE)) {
+					for (final String interf : requestedInterfaces) {
+						for (final ServiceInterfaceResponseDTO resultInterf : result.getInterfaces()) {
+							if (interf != null && interf.equalsIgnoreCase(resultInterf.getInterfaceName())) {
+								resultsWithRequestedInterfaces.add(result);
+							}							
+						}
+					}
+				} else if (result.getMetadata() != null && result.getMetadata().containsKey(LegacyCommonConstants.KEY_LEGACY_INTERFACE)) {					
+					for (final String interf : requestedInterfaces) {
+						if (interf != null && result.getMetadata() != null  && interf.equalsIgnoreCase(result.getMetadata().get(LegacyCommonConstants.KEY_LEGACY_INTERFACE))) {
+							final ServiceInterfaceResponseDTO interfaceResponseDTO = result.getInterfaces().iterator().next();
+							interfaceResponseDTO.setInterfaceName(result.getMetadata().get(LegacyCommonConstants.KEY_LEGACY_INTERFACE).toUpperCase());
+							result.setInterfaces(List.of(interfaceResponseDTO));
+							resultsWithRequestedInterfaces.add(result);
+						}
 					}
 				}
 			}
